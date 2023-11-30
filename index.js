@@ -75,3 +75,49 @@ const problem4 = function() {
 }
 problem4()
 //Output [2,4,6]
+
+
+// Problem 5
+
+const problem5 = function(){
+    function asyncSum (a,b, callback){
+        setTimeout(()=>callback(a+b),1000)
+    }
+    function asyncMultiply (a,b, callback){
+        setTimeout(()=>callback(a*b),500)
+    }
+    function asyncSquare (a, callback){
+        setTimeout(()=>callback(a*a),200)
+    }
+    
+    asyncSum(3,4,sum=>{
+        asyncMultiply(sum,2,product=>{
+            asyncSquare(product,result=>{
+                console.log(result)
+            })
+        })
+    })
+}
+problem5()
+// Output 196
+
+
+//Problem 6 
+
+const problem6 = function(){
+    function* fibonacciGenerator(){
+        let a=0, b=1;
+        while(true){
+            yield a;
+        [a,b] = [b, a+b]
+        }
+    }
+    
+    const getFibonacciSequence = n => 
+        Array.from({length:n},()=> 
+        fibonacciGenerator().next().value)
+    
+    console.log(getFibonacciSequence(5))
+}
+
+// Output [0 0 0 0 0]
