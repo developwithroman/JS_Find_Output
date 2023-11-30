@@ -48,3 +48,30 @@ const problem3 = () => {
     // Output : B
 }
 
+//Problem 4 
+
+const problem4 = function() {
+
+    function asyncMap(array, asyncFunction, callback){
+        const results = []
+        let count = 0
+        array.forEach((item,index)=>{
+            asyncFunction(item, value=>{
+                results[index] = value
+                count++;
+                if(count===array.length) {
+                    callback(results)
+                }
+            })
+        })
+    }
+    
+    const asyncDouble = (x, callback) => {
+        setTimeout(()=> callback(x*2),1000)
+    }
+    
+    asyncMap([1,2,3],asyncDouble, result=>console.log(result))
+      
+}
+problem4()
+//Output [2,4,6]
