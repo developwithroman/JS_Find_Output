@@ -47,3 +47,34 @@ let permute = (nums) => {
   dfs(0, nums);
   return result;
 };
+
+// permutations with no duplicates
+
+const permuteUnique = (nums) => {
+  // global state
+  let results = [];
+
+  let dfs = (i, nums) => {
+    //base case
+    if (i === nums.length) {
+      results.push(nums.slice());
+      return;
+    }
+
+    // recursive dfs
+
+    let hash = {};
+
+    for (j = i; j < nums.length; j++) {
+      if (nums[j] in hash) {
+        constinue;
+      }
+      hash[nums[j]] = true;
+      [nums[i], nums[j]] = [nums[j], nums[i]];
+      dfs(i + 1, nums);
+      [nums[i], nums[j]] = [nums[j], nums[i]];
+    }
+  };
+  dfs(0, nums);
+  return result;
+};
